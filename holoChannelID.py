@@ -31,10 +31,29 @@ HOLOIDS = [
     ["UCAWSyEs_Io8MtpY3m-zqILA", "Nene"],
     ["UCUKD-uaobj9jiqB-VXt71mA", "Botan"],
     ["UCK9V2B22uJYu3N7eR_BT9QA", "Polka"],
+]
+HOLOENIDS = [
     ["UCL_qhgtOy0dy1Agp8vkySQg", "Calliope"],
     ["UCHsx4Hqa-1ORjQTh9TYDhww", "Kiara"],
     ["UCMwGHR0BTZuLsmjY_NT5Pwg", "Ina'nis"],
     ["UCoSrY_IQQVpmIRZ9Xf-y93g", "Gura"],
-    ["UCyl1z3jo3XHR1riLFKG5UAg", "Amelia"],
-    ["UCKeAhJvy8zgXWbh9duVjIaQ", "Aruran"]
+    ["UCyl1z3jo3XHR1riLFKG5UAg", "Amelia"]
 ]
+HOLOidIDS = [
+    ["UCOyYb1c43VlX9rc_lT6NKQw", "Risu"],
+    ["UCP0BspO_AMEe3aQqqpo89Dg", "Hoshinova"],
+    ["UCAoy6rzhSf4ydcYjJw3WoVg", "Iofifteen"],
+]
+HOLOSTARSIDS = [
+    ["UCKeAhJvy8zgXWbh9duVjIaQ", "Aruran"],  # holostars
+    ["UC6t3-_N8A6ME1JShZHHqOMw", "Miyabi"],
+    ["UCZgOv3YDEs-ZnZWDYVwJdmA", "Izuru"],
+    ["UCEzsociuFqVwgZuMaZqaCsg", "Kira"],
+    ["UC9mf_ZVpouoILRY9NUIaK-w", "Rikka"],
+    ["UCNVEsYbiZjH5QLmGeSgTSzg", "Leda"],
+    ["UCGNI4MENvnsymYjKiZwv9eg", "Temma"],
+    ["UCANDOlYTJT7N5jlRC3zfzVA", "Roberu"],
+    ["UChSvpZYRPh0FvG4SJGSga3g", "Shien"],
+    ["UCwL7dgTxKo8Y4RFIKWaf8gA", "Oga"]
+]
+ALLHOLOIDS = HOLOIDS + HOLOENIDS + HOLOidIDS + HOLOSTARSIDS

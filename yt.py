@@ -1,4 +1,4 @@
-from holoChannelID import HOLOIDS
+from holoChannelID import ALLHOLOIDS
 import re
 import requests
 from bs4 import BeautifulSoup
@@ -12,7 +12,7 @@ def findVideoID(channelIDX):
 
 
 def returnResp(channelIDX):
-    fetch = "https://www.youtube.com/channel/"+HOLOIDS[channelIDX][0]
+    fetch = "https://www.youtube.com/channel/"+ALLHOLOIDS[channelIDX][0]
     request = requests.get(fetch)
     response = BeautifulSoup(request.text, "html.parser")
     return response

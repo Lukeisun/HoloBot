@@ -1,6 +1,6 @@
 import discord
 from config import *
-from holoChannelID import HOLOIDS
+from holoChannelID import ALLHOLOIDS
 from yt import isLive
 from embeddedMessages import *
 import time
@@ -19,13 +19,15 @@ async def on_ready():
         #     await channel.delete_messages(msg)
         await channel.send(embed=startMessage())
         j = 0
-        for i in HOLOIDS:
+        for i in ALLHOLOIDS:
             live = isLive(j)
             if(live):
                 embed = displayEmbed(j, channel, i)
                 await channel.send(embed=embed)
             j = j+1
-        time.sleep(6000)
+        print("Sleeping for 10 min")
+        time.sleep(600)
+        print("Awake")
 
 
 def is_me(m):
