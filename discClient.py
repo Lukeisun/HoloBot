@@ -1,6 +1,8 @@
 import discord
 from config import *
-from yt import *
+from holoChannelID import HOLOIDS
+from yt import isLive
+from embeddedMessages import *
 import time
 client = discord.Client()
 
@@ -9,23 +11,25 @@ client = discord.Client()
 async def on_ready():
     print('We have logged in as {0.user}'.format(client))
     channel = client.get_channel(BOTCHANNEL)
-    await channel.send('Kikkeriki!!')
-    while(1):
+    while True:
+        await channel.send(embed=clearMessageEmbed())
+        time.sleep(5)
+        await channel.purge(check=is_me)
+        # async for msg in channel.history():
+        #     await channel.delete_messages(msg)
+        await channel.send(embed=startMessage())
+        j = 0
         for i in HOLOIDS:
-            info = returnResp(i[0])
-            live = query(info)
+            live = isLive(j)
             if(live):
-                videoID = findVideoID(info)
-                await channel.send(
-                 '@everyone'
-                 + '`' + i[1] + ' is live!\n`'
-                 + 'https://www.youtube.com/watch?v=' + str(videoID))
-        time.sleep(60)
+                embed = displayEmbed(j, channel, i)
+                await channel.send(embed=embed)
+            j = j+1
+        time.sleep(6000)
 
 
-def query(info):
-    live = isLive(info)
-    return live
+def is_me(m):
+    return m.author == client.user
 
 
 @client.event

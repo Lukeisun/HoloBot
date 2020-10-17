@@ -1,34 +1,27 @@
-from apiclient.discovery import build
-from config import YTAPI
+from holoChannelID import HOLOIDS
 import re
-import textwrap
+import requests
+from bs4 import BeautifulSoup
 
 
-def findVideoID(resp):
-    truncated = textwrap.shorten(str(resp), width=302)
-    ID = re.findall("([A-Za-z0-9_\-]{11})", truncated)
-    return ID[len(ID)-1]
+def findVideoID(channelIDX):
+    resp = returnResp(channelIDX)
+    ID = re.search('"videoId":"[A-Za-z0-9_\-]{11}"', str(resp))
+    retVal = re.search("[A-Za-z0-9_\-]{11}", str(ID))
+    return str(retVal.group())
 
 
-def returnResp(channelID):
-    youtube = build('youtube', 'v3', developerKey=YTAPI)
-    request = youtube.search().list(
-         part="snippet",
-         channelId=channelID,
-         eventType="live",
-         type="video"
-     )
-    response = request.execute()
+def returnResp(channelIDX):
+    fetch = "https://www.youtube.com/channel/"+HOLOIDS[channelIDX][0]
+    request = requests.get(fetch)
+    response = BeautifulSoup(request.text, "html.parser")
     return response
 
 
-def isLive(resp):
-    x = re.search("totalResults': 1", str(resp))
-    if x is None:
-        return False
-    else:
+def isLive(channelIDX):
+    response = returnResp(channelIDX)
+    x = re.search('"iconType":"LIVE"', str(response))
+    if x is not None:
         return True
-
-
-x = returnResp("UCL_qhgtOy0dy1Agp8vkySQg")
-print(findVideoID(x))
+    else:
+        return False
