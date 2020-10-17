@@ -11,13 +11,19 @@ async def on_ready():
     channel = client.get_channel(BOTCHANNEL)
     await channel.send('Kikkeriki!!')
     while(1):
-        live = query("UCUKD-uaobj9jiqB-VXt71mA")
-        if(live):
-            await channel.send('LIVE!')
+        for i in HOLOIDS:
+            info = returnResp(i[0])
+            live = query(info)
+            if(live):
+                videoID = findVideoID(info)
+                await channel.send(
+                 '@everyone'
+                 + '`' + i[1] + ' is live!\n`'
+                 + 'https://www.youtube.com/watch?v=' + str(videoID))
         time.sleep(60)
 
-def query(channelID):
-    info = returnResp(channelID)
+
+def query(info):
     live = isLive(info)
     return live
 
