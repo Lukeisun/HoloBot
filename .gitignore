@@ -1,4 +1,4 @@
 *.txt
 __pycache__/
 *.jar
-config.py
+you.py
