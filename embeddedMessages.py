@@ -18,6 +18,7 @@ def startMessage():
         description='Hello everybody! This is HoloBot reporting live!',
         color=discord.Colour.blue()
     )
+    embed.add_field(name="**Github**",value="https://github.com/Lukeisun/HoloBot")
     embed.set_thumbnail(url="https://cdn.discordapp.com/avatars/95706039978033152/a_3533b0f7cf4b5c90faf407e68b09b668.gif?size=128")
     return embed
 
@@ -33,6 +34,7 @@ def displayEmbed(j, channel, i):
     dt_EST = dt_JST.astimezone(pytz.timezone('US/Eastern'))
     embed.set_footer(text=dt_JST.strftime('%X %Z')
                      + '\n' + dt_EST.strftime('%X %Z'))
+    embed.add_field(name="**Link**", value="[☆\*:.｡.o(≧▽≦)o.｡.:\*☆](https://www.youtube.com/watch?v=" + ID + ")")
     embed.set_image(
-      url="https://i.ytimg.com/vi/"+ID+"/hqdefault_live.jpg")
+     url="https://i.ytimg.com/vi/"+ID+"/hqdefault_live.jpg")
     return embed
