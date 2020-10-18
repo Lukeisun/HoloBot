@@ -45,9 +45,9 @@ class MyClient(discord.Client):
                 channel = self.get_channel(BOTCHANNEL)
                 ID = ALLHOLOIDS
                 await postMessageInChannel(channel, ID)
-        print("Going to sleep")
-        await asyncio.sleep(300)
-        print("Awaken my bustas")
+            print("Going to sleep")
+            await asyncio.sleep(300)
+            print("Awaken my bustas")
 
 
 client = MyClient()
