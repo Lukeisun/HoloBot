@@ -31,15 +31,6 @@ class MyClient(discord.Client):
         print(self.user.id)
         print('------')
 
-    # async def my_background_task(self):
-    #     await self.wait_until_ready()
-    #     counter = 0
-    #     channel = self.get_channel(BOTCHANNEL)  # channel ID goes here
-    #     while not self.is_closed():
-    #         counter += 1
-    #         await channel.send(counter)
-    #         await asyncio.sleep(5)  # task runs every 60 seconds
-
     async def readyInnerLoop(channel):
         print("entered inner " + channel)
         await channel.send(embed=startMessage())
@@ -57,10 +48,11 @@ class MyClient(discord.Client):
     async def background_query(self):
         await self.wait_until_ready()
         channel = self.get_channel(BOTCHANNEL)
+        await asyncio.sleep(2)
         while not self.is_closed():
             print("Printing clearing")
             await channel.send(embed=clearMessageEmbed())
-            await asyncio.sleep(3)
+            time.sleep(3)
             await channel.purge(limit=60, check=is_me)
             print("Going into innerloop")
             await channel.send(embed=startMessage())
