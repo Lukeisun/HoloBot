@@ -1,19 +1,11 @@
 import discord
 from config import *
-from holoChannelID import ALLHOLOIDS
+from holoChannelID import *
 from yt import isLive
 from embeddedMessages import *
 import time
 import asyncio
-# bot = discord.Client()
-# bchannel = bot.get_channel(BOTCHANNEL)
 
-# @bot.event
-# async def on_message(message):
-#     print("A message was sent!")
-#     await bchannel.send(embed=startMessage())
-#     if message.author == bot.user:
-#         return
 class MyClient(discord.Client):
     def __init__(self):
         super().__init__()
@@ -23,7 +15,6 @@ class MyClient(discord.Client):
     async def on_message(self, message):
         if message.author.id == self.user.id:
             return
-        print("Message sent")
 
     async def on_ready(self):
         print('Logged in as')
@@ -31,25 +22,28 @@ class MyClient(discord.Client):
         print(self.user.id)
         print('------')
 
-    async def readyInnerLoop(channel):
-        print("entered inner " + channel)
-        await channel.send(embed=startMessage())
-        print("printed send")
-        j = 0
-        for i in ALLHOLOIDS:
-            live = isLive(j)
-            if(live):
-                print(i[0])
-                embed = displayEmbed(j, channel, i)
-                await channel.send(embed=embed)
-            j = j+1
-        print("Done with innerloop")
-
     async def background_query(self):
         await self.wait_until_ready()
-        channel = self.get_channel(BOTCHANNEL)
-        await asyncio.sleep(2)
+        await asyncio.sleep(5)
         while not self.is_closed():
+            if FLAGFORINDIVIDUALCHANNEL == 0:
+                for chan in range (0, 4):
+                    if chan == 0:
+                        channel = self.get_channel(CHANNELJP)
+                        ID = HOLOIDS
+                    elif chan == 1:
+                        channel = self.get_channel(CHANNELEN)
+                        ID = HOLOENIDS
+                    elif chan == 2:
+                        channel = self.get_channel(CHANNELST)
+                        ID = HOLOSTARSIDS
+                    elif chan == 3:
+                        channel = self.get_channel(CHANNELID)
+                        ID = HOLOidIDS
+            elif FLAGFORINDIVIDUALCHANNEL == 1:
+                channel = self.get_channel(BOTCHANNEL)
+                ID = ALLHOLOIDS
+            channel = self.get_channel(BOTCHANNEL)
             print("Printing clearing")
             await channel.send(embed=clearMessageEmbed())
             time.sleep(3)
@@ -57,16 +51,16 @@ class MyClient(discord.Client):
             print("Going into innerloop")
             await channel.send(embed=startMessage())
             j = 0
-            for i in ALLHOLOIDS:
-                live = isLive(j)
+            for i in ID:
+                live = isLive(j, ID)
                 if(live):
-                    embed = displayEmbed(j, channel, i)
+                    embed = displayEmbed(j, i, ID)
                     await channel.send(embed=embed)
                 j = j+1
-            print("Done with innerloop")
-            print("Going to sleep")
-            await asyncio.sleep(300)
-            print("Awaken my bustas")
+            print("Done with loop")
+        print("Going to sleep")
+        await asyncio.sleep(300)
+        print("Awaken my bustas")
 
 
 client = MyClient()
