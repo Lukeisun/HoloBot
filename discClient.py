@@ -40,30 +40,34 @@ class MyClient(discord.Client):
                     elif chan == 3:
                         channel = self.get_channel(CHANNELID)
                         ID = HOLOidIDS
+                    await postMessageInChannel(channel, ID)
             elif FLAGFORINDIVIDUALCHANNEL == 1:
                 channel = self.get_channel(BOTCHANNEL)
                 ID = ALLHOLOIDS
-            channel = self.get_channel(BOTCHANNEL)
-            print("Printing clearing")
-            await channel.send(embed=clearMessageEmbed())
-            time.sleep(3)
-            await channel.purge(limit=60, check=is_me)
-            print("Going into innerloop")
-            await channel.send(embed=startMessage())
-            j = 0
-            for i in ID:
-                live = isLive(j, ID)
-                if(live):
-                    embed = displayEmbed(j, i, ID)
-                    await channel.send(embed=embed)
-                j = j+1
-            print("Done with loop")
+                await postMessageInChannel(channel, ID)
         print("Going to sleep")
         await asyncio.sleep(300)
         print("Awaken my bustas")
 
 
 client = MyClient()
+
+
+async def postMessageInChannel(channel, ID):
+    print("Printing clearing")
+    await channel.send(embed=clearMessageEmbed())
+    time.sleep(3)
+    await channel.purge(limit=60, check=is_me)
+    print("Going into innerloop")
+    await channel.send(embed=startMessage())
+    j = 0
+    for i in ID:
+        live = isLive(j, ID)
+        if(live):
+            embed = displayEmbed(j, i, ID)
+            await channel.send(embed=embed)
+        j = j+1
+    print("Done with loop")
 
 
 def is_me(m):
