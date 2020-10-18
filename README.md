@@ -1,10 +1,10 @@
 # HoloBot!
-*This is my first outside of class project that I've done, so please
-be gentle if you're looking at the repo.*
+***This is my first outside of class project that I've done, so please
+be gentle if you're looking at the repo.***
 
 ## Description
 HoloBot is a discord bot that scrapes the HTML of HoloLive members
-youtube channel, which then ascertains if that user is on. Then sends
+youtube channel, which then ascertains if that user is live. Then sends
 a message into a respective discord channel.
 
 I hope that anybody who has an interest in HoloLive and runs a
