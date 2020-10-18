@@ -3,3 +3,4 @@ __pycache__/
 *.jar
 you.py
 ..bfg-report/
+configforgit.py
