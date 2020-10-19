@@ -1,5 +1,6 @@
 # HoloBot!
 ***This is my first outside of class project that I've done, so please be gentle if you're looking at the repo.***
+
 *However if you see anything that can be improved I ask that you please notify me!"
 ![image](https://imgur.com/LRRYAjQ.png)
 
