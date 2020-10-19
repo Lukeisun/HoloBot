@@ -47,14 +47,13 @@ class MyClient(discord.Client):
                 await postMessageInChannel(channel, ID)
             print("Going to sleep")
             await asyncio.sleep(300)
-            print("Awaken my bustas")
+            print("Awaken my bustas\n")
 
 
 client = MyClient()
 
 
 async def postMessageInChannel(channel, ID):
-    print("Printing clearing")
     await channel.send(embed=clearMessageEmbed())
     time.sleep(3)
     await channel.purge(limit=60, check=is_me)
@@ -67,7 +66,7 @@ async def postMessageInChannel(channel, ID):
             embed = displayEmbed(j, i, ID)
             await channel.send(embed=embed)
         j = j+1
-    print("Done with loop")
+    print("Done with loop\n")
 
 
 def is_me(m):
