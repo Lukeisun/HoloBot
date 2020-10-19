@@ -1,6 +1,7 @@
 # HoloBot!
 ***This is my first outside of class project that I've done, so please
 be gentle if you're looking at the repo.***
+![](https://imgur.com/SMZxVr1)
 
 ## Description
 HoloBot is a discord bot that scrapes the HTML of HoloLive members
