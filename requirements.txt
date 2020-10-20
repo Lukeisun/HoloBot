@@ -1,2 +1,8 @@
 discord.py
 BeautifulSoup4
+time
+asyncio
+requests
+re
+datetime
+pytz
