@@ -33,9 +33,5 @@ My main goal of this project was twofold. For one, to get a
 better understanding of how it feels to manage a project as well as
 contributing to a community that shares an avid interest of mine!
 
-## Instructions
-
-I am still figuring out how to approach this, so please be patient!
-
 ### Any issues/suggestions please dm me on discord Lukeisun#4168
 ### Feel free to join the discord! https://discord.gg/c2ZjFQH
