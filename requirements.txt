@@ -1,2 +1,2 @@
 discord.py
-beautifulsoup4.py
+beautifulsoup.py
