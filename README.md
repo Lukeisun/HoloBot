@@ -19,7 +19,7 @@
     * pipenv run python discClient.py
     ~ Note you must keep this shell running for it to work ~ 
  
-  After all that your bot should be working! If there is interest in getting this bot to run on a webserver, like it is on my server, like heroku I wouldn't mind adding it in!
+  After all that your bot should be working! If there is interest in getting this bot to run on a server, like it is on my server, like heroku I wouldn't mind adding it in!
   
 ## Description
 HoloBot is a discord bot that scrapes the HTML of HoloLive members
