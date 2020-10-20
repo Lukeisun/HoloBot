@@ -1,4 +1,4 @@
-TOKEN = "" # add your own discord token, as well as server ID and channel ID
+TOKEN = "" # add your own discord token, as well as channel ID
 ######################################################################################################################
 FLAGFORINDIVIDUALCHANNEL = 0 # set to 0 for separate channel postiing OR 1 for general live update in one channel.
  # If you set it to 0 fill in below variables with your channel IDS
