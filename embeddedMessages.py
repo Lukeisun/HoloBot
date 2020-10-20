@@ -20,7 +20,7 @@ def startMessage():
         color=discord.Colour.blue()
     )
     embed.add_field(name="**Github**",value="https://github.com/Lukeisun/HoloBot")
-    embed.set_thumbnail(url="https://cdn.discordapp.com/avatars/95706039978033152/a_3533b0f7cf4b5c90faf407e68b09b668.gif?size=128")
+    embed.set_thumbnail(url="https://i.imgur.com/hJSQhKN.png")
     return embed
 
 
