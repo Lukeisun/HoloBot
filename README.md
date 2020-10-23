@@ -1,5 +1,5 @@
 # HoloBot! 
-## I'm currently working on making the bot so all that needs to be done is you just simply invite the bot to your server! Progress is going to be slow as midterms are coming up but I will do by bes. Working on it in a separate repo so this one doesn't get all cluttered from testing. 
+## I'm currently working on making the bot so all that needs to be done is you just simply invite the bot to your server! Progress is going to be slow as midterms are coming up but I will do my best. Working on it in a separate repo so this one doesn't get all cluttered from testing. 
 ***This is my first outside of class project that I've done, so please be gentle if you're looking at the repo.***
 
 ***However if you see anything that can be improved I ask that you please notify me!***
