@@ -5,12 +5,39 @@ from yt import isLive
 from embeddedMessages import *
 import time
 import asyncio
+import json
+import os
+from discord.ext import commands
 
-class MyClient(discord.Client):
-    def __init__(self):
-        super().__init__()
+
+class MyBot(commands.Bot):
+    def __init__(self, command_prefix):
+        super().__init__(command_prefix)
         # create the background task and run it in the background
         self.bg_task = self.loop.create_task(self.background_query())
+
+    async def on_guild_join(self, guild):
+        channel = discord.utils.get(guild.text_channels, name='general')
+        await channel.send(embed=joinServerEmbed())
+        writeToJson(guild)
+
+    async def on_guild_remove(self, guild):
+        new_data = {
+            "names": []
+        }
+        with open('channels.json', 'r') as f:
+            data = json.load(f)
+        if data == new_data:
+            pass
+        else:
+            for entry in data["names"]:
+                if guild.name == entry["name"]:
+                    pass
+                else:
+                    print('hai'+guild.name)
+                    new_data["names"].append(entry)
+            print(new_data)
+            dumpJson(new_data)
 
     async def on_message(self, message):
         if message.author.id == self.user.id:
@@ -27,17 +54,17 @@ class MyClient(discord.Client):
         await asyncio.sleep(5)
         while not self.is_closed():
             if FLAGFORINDIVIDUALCHANNEL == 0:
-                for chan in range (0, 4):
-                    if chan == 0:
+                for i in range (0, 4):
+                    if i == 0:
                         channel = self.get_channel(CHANNELJP)
                         ID = HOLOIDS
-                    elif chan == 1:
+                    elif i == 1:
                         channel = self.get_channel(CHANNELEN)
                         ID = HOLOENIDS
-                    elif chan == 2:
+                    elif i == 2:
                         channel = self.get_channel(CHANNELST)
                         ID = HOLOSTARSIDS
-                    elif chan == 3:
+                    elif i == 3:
                         channel = self.get_channel(CHANNELID)
                         ID = HOLOidIDS
                     await postMessageInChannel(channel, ID)
@@ -50,7 +77,50 @@ class MyClient(discord.Client):
             print("Awaken my bustas\n")
 
 
-client = MyClient()
+client = MyBot(command_prefix='.')
+bot = commands.Bot(command_prefix='.')
+
+@bot.command()
+async def channelEN(ctx, *args):
+    if len(args)!=1:
+        await ctx.send("Please add a channel name")
+    elif len(args)==1:
+        ctxid = ctx.guild.id
+        updateJSON('en', args, ctxid)
+
+
+
+def updateJSON(region, arg, guildid):
+    key = region+'ID'
+    with open('channels.json', 'r') as f:
+        data = json.load(f)
+        for item in data["names"]:
+            if guildid in item:
+                item[key] = arg
+    dumpJson(data)
+
+
+def writeToJson(guild):
+    with open('channels.json', 'r') as f:
+        data = json.load(f)
+        temp = data["names"]
+        y = {
+            'name': guild.name,
+            'serverID': guild.id,
+            'prefix': '.',
+            'enID': None,
+            'idID': None,
+            'jpID': None,
+            'hstID': None,
+            'allID': None
+        }
+        temp.append(y)
+    dumpJson(data)
+
+
+def dumpJson(data):
+    with open('channels.json', 'w') as f:
+        json.dump(data, f, indent=4)
 
 
 async def postMessageInChannel(channel, ID):
@@ -66,6 +136,7 @@ async def postMessageInChannel(channel, ID):
             embed = displayEmbed(j, i, ID)
             await channel.send(embed=embed)
         j = j+1
+
     print("Done with loop\n")
 
 
@@ -73,4 +144,8 @@ def is_me(m):
     return m.author == client.user
 
 
-client.run(TOKEN)
+loop=asyncio.get_event_loop()
+loop.create_task(client.start(TOKEN))
+loop.create_task(bot.start(TOKEN))
+loop.run_forever()
+#client.run(TOKEN)

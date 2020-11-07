@@ -1,7 +1,7 @@
 import re
 import requests
 from bs4 import BeautifulSoup
-from holoChannelID import ALLHOLOIDS
+
 
 def findVideoID(channelIDX, ID):
     resp = returnResp(channelIDX, ID)
