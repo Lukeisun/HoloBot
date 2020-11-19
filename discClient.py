@@ -81,22 +81,54 @@ client = MyBot(command_prefix='.')
 bot = commands.Bot(command_prefix='.')
 
 @bot.command()
-async def channelEN(ctx, *args):
-    if len(args)!=1:
+async def channelEN(ctx, args=None):
+    await updateJSONchannel(ctx,args,"en")
+
+@bot.command()
+async def channelJP(ctx, args=None):
+    await updateJSONchannel(ctx,args,"jp")
+
+@bot.command()
+async def channelID(ctx, args=None):
+    await updateJSONchannel(ctx, args,"id")
+
+@bot.command()
+async def channelHST(ctx, args=None):
+    await updateJSONchannel(ctx, args, "hst")
+
+@bot.command()
+async def channelALL(ctx, args=None):
+    await updateJSONchannel(ctx,args, "all")
+
+
+
+async def updateJSONchannel(ctx,args, region):
+     if args is None:
         await ctx.send("Please add a channel name")
-    elif len(args)==1:
-        ctxid = ctx.guild.id
-        updateJSON('en', args, ctxid)
+     elif len(args)>1:
+        channel = lookupChannel(ctx,args)
+        if(channel is not None):
+            updateJSON(region, ctx,channel)
+            await ctx.send("Channel "+ region + " has been set to " + str(channel))
+        else:
+            await ctx.send("No such channel")
 
 
+def lookupChannel(ctx,args):
+    for channel in ctx.guild.text_channels:
+        if(args == channel.name):
+            return channel.id
+    return None       
 
-def updateJSON(region, arg, guildid):
-    key = region+'ID'
+
+def updateJSON(region, ctx, channel):
+    key = region+"ID"
     with open('channels.json', 'r') as f:
         data = json.load(f)
         for item in data["names"]:
-            if guildid in item:
-                item[key] = arg
+            if ctx.guild.id == item['serverID']:
+                item[key] = channel
+                print(item[key])
     dumpJson(data)
 
 
